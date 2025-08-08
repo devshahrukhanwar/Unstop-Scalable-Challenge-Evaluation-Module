@@ -64,20 +64,26 @@ Build a secure and scalable module to accept code submissions from a web-based I
 5. Laravel updates DB and frontend gets real-time updates.
 6. Final score is calculated and stored.
 
-## 5. Technology Choices
+## 5. Technology Choices (Minimal)
 
 - **Frontend:** Vue.js 3, Monaco Editor, WebSocket/SSE.
 - **Backend:** Laravel (API, Auth, Job Queue).
-- **Job Queue:** Laravel Queue (Redis).
+- **Job Queue:** Laravel Queue (DB/Redis).
 - **Executor:** PHP scripts for orchestration + language-specific CLI compilers/interpreters installed on the server.
 - **DB:** MySQL/PostgreSQL for metadata.
 - **File Storage:** Local or S3 (optional for logs).
 
+---
+
+**Note:** For `Executor` scripts I need to study more in depth, how to create it, it may be done on more Devops heavy side, but I am referring to code alternatives here.
+
+---
+
 ## 6. Security Considerations
 
 - Run user code with a low-privilege user.
-- Set CPU and memory limits via OS tools (e.g., `ulimit`).
-- Disable dangerous PHP functions if PHP is used in execution layer.
+- Set CPU and memory limits via OS tools (e.g. `ulimit`).
+- Disable dangerous PHP functions if PHP is used in execution layer (We can create a list of dangerous functions in `config`).
 - Validate inputs before processing.
 - Restrict file system and network access.
 
@@ -86,7 +92,7 @@ Build a secure and scalable module to accept code submissions from a web-based I
 - Start with one executor server.
 - Add more executor servers when traffic grows — Laravel Queue supports multiple workers easily.
 - Use Redis for a single, central job queue.
-- Optimize by caching test cases locally.
+- Optimize by caching test cases locally (File/DB/Redis).
 
 ## 8. Example API Endpoints
 
@@ -116,5 +122,3 @@ Build a secure and scalable module to accept code submissions from a web-based I
 **Day 5:**
 
 - Final testing, polish UI, handle edge cases.
-
-POC ready in ~5 days. Full production version with more security + languages in 2-3 weeks.
