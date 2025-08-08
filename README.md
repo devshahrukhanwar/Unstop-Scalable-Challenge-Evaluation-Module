@@ -40,8 +40,8 @@ Build a secure and scalable module to accept code submissions from a web-based I
 
 4. **Code Executor Service**
 
-   - Runs on a dedicated server or VM (Dedicated Docker container).
-   - Uses simple sandboxing for security such as `lightweight Docker container`.
+   - Runs on a dedicated server or VM (Dedicated Docker containers).
+   - Uses simple sandboxing for security such as `lightweight Docker containers`.
    - Runs code against predefined test cases for the chosen language.
    - Captures `stdout, stderr, execution time, and memory usage`.
 
@@ -66,7 +66,7 @@ Build a secure and scalable module to accept code submissions from a web-based I
 
 ## 5. Technology Choices (Minimal)
 
-- **Frontend:** Vue.js 3, Monaco Editor, WebSocket/SSE.
+- **Frontend:** Vue.js, Monaco Editor, WebSocket/SSE.
 - **Backend:** Laravel (API, Auth, Job Queue).
 - **Job Queue:** Laravel Queue (DB/Redis).
 - **Executor:** PHP scripts for orchestration + language-specific CLI compilers/interpreters installed on the server.
@@ -100,25 +100,8 @@ Build a secure and scalable module to accept code submissions from a web-based I
 - `GET /submissions/{id}` — Get submission status and results.
 - WebSocket `/submissions/{id}/stream` — Real-time result updates.
 
-## 9. Minimal Implementation Plan
+---
 
-**Day 1:**
+## **Additional Points**
 
-- Set up Laravel API, DB schema, basic Vue IDE with Monaco Editor.
-
-**Day 2:**
-
-- Implement Laravel Queue with Redis.
-- Create simple executor that runs Python and PHP scripts in sandbox.
-
-**Day 3:**
-
-- Add scoring logic and real-time updates via WebSocket.
-
-**Day 4:**
-
-- Add more language support and basic security limits.
-
-**Day 5:**
-
-- Final testing, polish UI, handle edge cases.
+To scale it well and make it responsive as userbase grows, we can increase the memory of the server, so we can use more and more short-lived Docker containers (may be use AWS fargate), I will need some time to go into Devops things, but the arcitechture above I am submitting is basically code driven rather than Devops heavy, as I am still learning Devops.
