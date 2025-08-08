@@ -25,13 +25,13 @@ Build a secure and scalable module to accept code submissions from a web-based I
 
    - Based on [Monaco Editor](https://www.npmjs.com/package/@guolao/vue-monaco-editor).
    - Sends submission (code, language, metadata) to backend via HTTPS.
-   - Receives real-time results via WebSocket or Server-Sent Events.
+   - Receives real-time results via [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) or [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
 
 2. **Backend API (Laravel)**
 
    - Receives and validates submissions.
    - Stores submission record in database.
-   - Sends job to **Job Queue** for processing.
+   - Sends job to **[Job Queue](https://laravel.com/docs/12.x/queues)** for processing.
 
 3. **Job Queue**
 
@@ -40,10 +40,12 @@ Build a secure and scalable module to accept code submissions from a web-based I
 
 4. **Code Executor Service**
 
-   - Runs on a dedicated server or VM (Dedicated Docker containers).
-   - Uses simple sandboxing for security such as `lightweight Docker containers`.
-   - Runs code against predefined test cases for the chosen language.
-   - Captures `stdout, stderr, execution time, and memory usage`.
+- For inhouse executor (Need to study more how we can do it)
+  - Runs on a dedicated server or VM (Dedicated Docker containers).
+  - Uses simple sandboxing for security such as `lightweight Docker containers`.
+  - Runs code against predefined test cases for the chosen language.
+  - Captures `stdout, stderr, execution time, and memory usage`.
+- Some paid services are there, through which we can easily do our job via REST API - [Judge0](https://judge0.com/), [Sphere Engine](https://sphere-engine.com/)
 
 5. **Scoring & Result Storage**
 
